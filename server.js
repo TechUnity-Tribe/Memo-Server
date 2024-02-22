@@ -7,6 +7,7 @@ const http = require("http");
 const socketIo = require('socket.io');
 const dbConnect = require("./src/config/database");
 const authRoute = require("./src/routes/auth.route");
+const messageRoute = require("./src/routes/message.route");
 
 
 dbConnect();
@@ -25,7 +26,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
-app.use('/api', authRoute)
+app.use('/api/auth', authRoute);
+app.use('/api', messageRoute);
 
 
 io.on('connection', (socket) => {
